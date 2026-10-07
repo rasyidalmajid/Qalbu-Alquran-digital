@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" class="" id="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">     
+        @theme {
+            --color-hijau-primary: #004B23;
+            --color-hijau-secondary: #007F5F;
+            --color-hijau-tertiary: #2B9348;
+            --color-black-primary: #172238;
+            --color-black-background: #020617;
+            --color-icon: #64748B;
+            --color-icon-bg: #334155;
+        }
+        @import "tailwindcss";
+        @custom-variant dark (&:where(.dark, .dark *));
+    </style>
+    <head>
+</head>
+</head>
+<body class="dark:bg-black-background">
+    <header>
+        <nav class="bg-white dark:bg-black-background border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+            
+            <div class="flex-shrink-0">
+                <a href="#" class="text-xl font-bold text-black-background dark:text-white tracking-wide">
+                My<span class="text-green-600 dark:text-green-400">Brand</span>
+                </a>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#" class="text-sm font-medium text-green-600 dark:text-green-400 transition-colors">Home</a>
+                <a href="#" class="text-sm font-medium text-gray-600 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400 transition-colors">Features</a>
+                <a href="#" class="text-sm font-medium text-gray-600 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400 transition-colors">Pricing</a>
+                <a href="#" class="text-sm font-medium text-gray-600 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400 transition-colors">Contact</a>
+            </div>
+
+            <div class="flex items-center">
+                <button id="theme-toggle" class="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors">
+                <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="yellow" viewBox="0 0 20 20">
+                    <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z"></path>
+                </svg>
+                <svg id="theme-toggle-dark-icon" class="w-5 h-5" fill="yellow" viewBox="0 0 20 20">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                </svg>
+                </button>
+            </div>
+
+            </div>
+        </div>
+        </nav>
+    </header>
+    <main>
+        <section class="relative overflow-hidden text-black-primary dark:text-white py-20 lg:py-32" id="hero">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+            <h1 class="font-montserrat text-xl sm:text-6xl  tracking-tight leading-tight max-w-4xl mx-auto mb-6">
+            Welcome To Qalbu
+            </h1>
+
+            <p class="text-lg sm:text-xl text-black-secondary dark:text-white max-w-2xl mx-auto mb-10 leading-relaxed">
+            Membaca Al-Quran, menemukan doa harian, dan melacak jadwal shalat tidak pernah sejelas ini. Dirancang untuk fokus dan kekhusyukan Anda.            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="#baca-quran" class="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-3.5 rounded-md bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition-all">
+                <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 48 48" id="a" xmlns="http://www.w3.org/2000/svg"><defs><style>.b{fill:none;stroke:white;stroke-linecap:round;stroke-linejoin:round;}</style></defs><path class="b" d="m23.2243,13.5421c2.4953-2.8598,4.7664-5.1308,3.7009-6.2804s-18.3123,5.2534-17.3389,6.9252c.5801.9963,15.9886,12.1786,17.5083,13.0778,1.7856,1.0565,4.6529-.1806,4.4006-2.1432s-2.3271-18.0117-2.3271-18.0117c0,0,1.1776,1.5818,1.5421,2.6752"/><path class="b" d="m35.0841,26.507c-.2523-1.9626-2.3271-18.0117-2.3271-18.0117,0,0,1.1776,1.5818,1.5421,2.6752"/><path class="b" d="m28.3832,33.8692c0-6.2176-2.0893-20.0105-2.0893-20.0105,0,0,1.1776,1.5818,1.5421,2.6752"/><path class="b" d="m22.0709,14.5467c-.3645-1.0935-1.5421-2.6752-1.5421-2.6752,0,0,.5927,7.208,4.0413,8.6379-9.2464-4.479-13.6472,10.1776-17.6425,5.8879-2.8507-3.0608,2.271-7.3598,2.271-7.3598"/><path class="b" d="m37.9159,14.0304c-.3645-1.0935-1.5421-2.6752-1.5421-2.6752,0,0,2.0262,17.895,2.4579,22.514.2057,2.2009-3.8738,3.2103-5.3878-.4907s-.1262-4.7523.7991-4.7523,2.4393,3.0841,0,4.514-6.5047,2.4673-7.7383,3.8972-3.3925,4.7103-4.8224,4.7103-4.2336-1.5421-1.0374-7.8785"/><path class="b" d="m41.4486,31.1495c-.2523-3.2804-1.9626-16.5701-1.9626-16.5701,0,0,1.1776,1.5818,1.5421,2.6752"/><path class="b" d="m13.993,8.9439c1.7243-1.0724,5.278-1.7453,7.1285-3.1963"/><path class="b" d="m8.9813,27.1933c-2.2991,2.5263-1.6542,7.6572,1.0374,6.8161,1.0051-.3141,2.2153-2.4048,4.2336-3.3084,3.3866-1.5162,7.7185-2.2894,7.4579-4.7103-.3364-3.1262-3.3365-4.9446-3.3365-4.9446"/><path class="b" d="m25.8178,29.0187c-1.4369-.6343-1.9065-1.3672-1.9065-1.3672,1.1636,2.6008,2.0607,4.1849,2.0888,5.4326s-6.4065,5.236-9.1682,5.236c-3.2173,0-5.5707-2.3117-4.6569-6.15"/><path class="b" d="m10.1351,14.7347c-2.1141.9802-3.4251,5.6169-1.8128,5.149"/><circle class="b" cx="24" cy="24" r="21.5"/></svg>
+                Baca Al-Qur'an
+            </a>
+
+            <a href="#kumpulan-doa" class="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-3.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold transition-all">
+                <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 10.4V20M12 10.4C12 8.15979 12 7.03969 11.564 6.18404C11.1805 5.43139 10.5686 4.81947 9.81596 4.43597C8.96031 4 7.84021 4 5.6 4H4.6C4.03995 4 3.75992 4 3.54601 4.10899C3.35785 4.20487 3.20487 4.35785 3.10899 4.54601C3 4.75992 3 5.03995 3 5.6V16.4C3 16.9601 3 17.2401 3.10899 17.454C3.20487 17.6422 3.35785 17.7951 3.54601 17.891C3.75992 18 4.03995 18 4.6 18H7.54668C8.08687 18 8.35696 18 8.61814 18.0466C8.84995 18.0879 9.0761 18.1563 9.29191 18.2506C9.53504 18.3567 9.75977 18.5065 10.2092 18.8062L12 20M12 10.4C12 8.15979 12 7.03969 12.436 6.18404C12.8195 5.43139 13.4314 4.81947 14.184 4.43597C15.0397 4 16.1598 4 18.4 4H19.4C19.9601 4 20.2401 4 20.454 4.10899C20.6422 4.20487 20.7951 4.35785 20.891 4.54601C21 4.75992 21 5.03995 21 5.6V16.4C21 16.9601 21 17.2401 20.891 17.454C20.7951 17.6422 20.6422 17.7951 20.454 17.891C20.2401 18 19.9601 18 19.4 18H16.4533C15.9131 18 15.643 18 15.3819 18.0466C15.15 18.0879 14.9239 18.1563 14.7081 18.2506C14.465 18.3567 14.2402 18.5065 13.7908 18.8062L12 20" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Kumpulan Doa
+            </a>
+            </div>
+        </div>
+        </section>
+            <section id="terakhir-dibaca-container" class="max-w-7xl mx-auto px-4 mb-16 hidden">
+            <div class="bg-gradient-to-r from-brand-50 to-brand-100 dark:from-brand-950 dark:to-slate-900 rounded-2xl p-6 border border-brand-200 dark:border-brand-900 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                    <span class="text-sm font-semibold uppercase tracking-widest text-brand-600 dark:text-brand-500">Terakhir Dibaca</span>
+                    <h3 id="last-read-title" class="text-xl font-bold mt-1">Surah Al-Baqarah</h3>
+                    <p id="last-read-ayat" class="text-slate-600 dark:text-slate-400 text-sm">Ayat 15</p>
+                </div>
+                <a href="#lanjutkan" class="px-6 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-medium rounded-full hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                    Lanjutkan
+                </a>
+            </div>
+    </section>
+    </main>
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+        const darkmode = document.getElementById('html');
+        themeToggleBtn.addEventListener('click', () => {
+        // Toggle class dark di HTML
+        darkmode.classList.toggle("dark");
+        
+        // Toggle ikon Sun/Moon
+        darkIcon.classList.toggle('hidden');
+        lightIcon.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
