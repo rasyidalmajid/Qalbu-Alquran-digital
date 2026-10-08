@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qalbu - Doa Harian & Dzikir</title>
     
+    <!-- Script Anti-Flash Theme (Mencegah background putih muncul sekejap di mode dark) -->
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,12 +35,8 @@
                     },
                     colors: {
                         brand: {
-                            50: '#ecfdf5',
-                            100: '#d1fae5',
-                            500: '#10b981',
-                            600: '#059669',
-                            900: '#064e3b',
-                            950: '#022c22',
+                            light: '#18181b', // Zinc-900 (hampir hitam)
+                            dark: '#f4f4f5',  // Zinc-100 (hampir putih)
                         }
                     }
                 }
@@ -39,7 +44,7 @@
         }
     </script>
     <style>
-        /* Tipografi ArabPresisi tanpa tumpang tindih */
+        /* Tipografi Arab Presisi tanpa tumpang tindih */
         .font-arabic {
             font-family: 'Noto Naskh Arabic', 'Amiri', serif;
             line-height: 2.4 !important;
@@ -91,25 +96,25 @@
 <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased transition-colors duration-300 flex flex-col min-h-screen">
 
     <!-- Navbar -->
-    <nav class="sticky top-0 z-50 w-full backdrop-blur-xl bg-slate-50/80 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800">
+    <nav class="sticky top-0 z-50 w-full backdrop-blur-xl bg-slate-50/80 dark:bg-slate-950/80 border-b border-slate-300 dark:border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <a href="/index.html" class="flex items-center gap-2 group">
-                <i class="ph-fill ph-book-open-text text-2xl text-brand-600 dark:text-brand-500 group-hover:scale-110 transition-transform"></i>
-                <span class="font-bold text-xl tracking-tight">Qalbu</span>
+                <i class="ph-fill ph-book-open-text text-2xl text-brand-light dark:text-brand-dark group-hover:scale-110 transition-transform"></i>
+                <span class="font-bold text-xl tracking-tight text-brand-light dark:text-brand-dark">Qalbu</span>
             </a>
             
             <!-- Menu Desktop -->
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-                <a href="/al-quran/home-quran.html" class="hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Al-Quran</a>
-                <a href="#" class="text-brand-600 dark:text-brand-500 font-semibold transition-colors">Doa Harian</a>
-                <a href="#" class="hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Jadwal Shalat</a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-semibold">
+                <a href="/al-quran/home-quran.html" class="hover:text-brand-light dark:hover:text-brand-dark transition-colors">Al-Quran</a>
+                <a href="#" class="text-brand-light dark:text-brand-dark font-bold underline-offset-4 underline transition-colors">Doa Harian</a>
+                <a href="/index.html#jadwal" class="hover:text-brand-light dark:hover:text-brand-dark transition-colors">Jadwal Shalat</a>
             </div>
 
             <div class="flex items-center gap-2">
                 <!-- Theme Toggle -->
                 <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle Dark Mode">
-                    <i class="ph ph-moon text-xl dark:hidden"></i>
-                    <i class="ph ph-sun text-xl hidden dark:block text-amber-400"></i>
+                    <i class="ph ph-moon text-xl dark:hidden text-slate-800"></i>
+                    <i class="ph ph-sun text-xl hidden dark:block text-amber-300"></i>
                 </button>
 
                 <!-- Tombol Hamburger Mobile -->
@@ -121,33 +126,33 @@
         </div>
 
         <!-- Panel Menu Mobile -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur-xl px-4 pt-2 pb-4 space-y-1">
-            <a href="/al-quran/home-quran.html" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-200/60 dark:hover:bg-slate-800/60 hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Al-Quran</a>
-            <a href="/doa/home-doa.html" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-brand-600 dark:text-brand-500 bg-brand-50/50 dark:bg-slate-900 transition-colors">Doa Harian</a>
-            <a href="/jadwal-shalat/home-jadwal.html" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-200/60 dark:hover:bg-slate-800/60 hover:text-brand-600 dark:hover:text-brand-500 transition-colors">Jadwal Shalat</a>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-300 dark:border-slate-800 bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur-xl px-4 pt-2 pb-4 space-y-1">
+            <a href="/al-quran/home-quran.html" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-200/80 dark:hover:bg-slate-800/80 hover:text-brand-light dark:hover:text-brand-dark transition-colors">Al-Quran</a>
+            <a href="/doa/home-doa.html" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-bold text-brand-light dark:text-brand-dark bg-slate-200/60 dark:bg-slate-900 transition-colors">Doa Harian</a>
+            <a href="/index.html#jadwal" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-200/80 dark:hover:bg-slate-800/80 hover:text-brand-light dark:hover:text-brand-dark transition-colors">Jadwal Shalat</a>
         </div>
     </nav>
 
     <!-- Header Section -->
     <header class="max-w-4xl mx-auto px-4 pt-16 pb-10 text-center">        
-        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-3 text-slate-900 dark:text-slate-100">
             Kumpulan Doa & Dzikir Harian
         </h1>
-        <p class="text-slate-600 dark:text-slate-400 text-base sm:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+        <p class="text-slate-700 dark:text-slate-300 text-base sm:text-lg max-w-2xl mx-auto mb-8 leading-relaxed font-medium">
             Temukan kumpulan doa harian shahih, dzikir, serta bacaan ibadah lengkap beserta teks Arab, latin, dan artinya.
         </p>
 
         <!-- Search Bar -->
         <div class="relative max-w-xl mx-auto mb-8">
-            <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
-            <input type="text" id="search-doa" placeholder="Cari doa (misal: sebelum tidur, makan, sapu jagat)..." class="w-full pl-11 pr-4 py-3.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all text-sm">
+            <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 dark:text-slate-300 text-lg"></i>
+            <input type="text" id="search-doa" placeholder="Cari doa (misal: sebelum tidur, makan, sapu jagat)..." class="w-full pl-11 pr-4 py-3.5 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-full shadow-sm text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-all text-sm font-medium">
         </div>
 
-        <!-- Filter Kategori Tabs (Scrollable Mobile) -->
-        <div id="category-tabs" class="flex items-center justify-center gap-2 overflow-x-auto no-scrollbar py-2 px-1">
+        <!-- Filter Kategori Tabs -->
+        <div id="category-tabs" class="flex flex-col sm:flex-row items-center justify-center gap-3 overflow-x-auto no-scrollbar py-2 px-1">
             <div class="w-full max-w-xs">
                 <div class="relative">
-                    <select id="category-filter" onchange="applyFilters()" class="w-full appearance-none bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 text-sm font-medium rounded-xl px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all cursor-pointer">
+                    <select id="category-filter" onchange="applyFilters()" class="w-full appearance-none bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 text-sm font-semibold rounded-xl px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all cursor-pointer">
                         <option value="Semua Kategori">Semua Kategori</option>
                         <option value="Doa Sebelum dan Sesudah Tidur">Doa Sebelum dan Sesudah Tidur</option>
                         <option value="Doa di Kamar Mandi">Doa di Kamar Mandi</option>
@@ -194,14 +199,14 @@
                         <option value="Doa Berlindung Dari Orang Zalim Dan Orang Kafir">Doa Berlindung Dari Orang Zalim Dan Orang Kafir</option>
                         <option value="Beberapa Doa Terkait Shalat">Beberapa Doa Terkait Shalat</option>
                     </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-700 dark:text-slate-300">
                         <i class="ph ph-caret-down text-lg"></i>
                     </div>
                 </div>
             </div>
             <div class="w-full max-w-xs">
                 <div class="relative">
-                    <select id="tag-filter" onchange="applyFilters()" class="w-full appearance-none bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 text-sm font-medium rounded-xl px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all cursor-pointer">
+                    <select id="tag-filter" onchange="applyFilters()" class="w-full appearance-none bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 text-sm font-semibold rounded-xl px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all cursor-pointer">
                         <option value="Semua Tag">Semua Tag</option>
                         <option value="tidur">tidur</option>
                         <option value="malam">malam</option>
@@ -226,7 +231,7 @@
                         <option value="ampunan">ampunan</option>
                         <option value="orang tua">orang tua</option>
                     </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-700 dark:text-slate-300">
                         <i class="ph ph-caret-down text-lg"></i>
                     </div>
                 </div>
@@ -239,9 +244,9 @@
         
         <!-- Doa Grid Container -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="doa-grid">
-            <!-- Items rendered dynamically via JavaScript -->
-            <div class="col-span-full text-center py-12 text-slate-400">
-                <i class="ph-fill ph-spinner animate-spin text-3xl mb-2 inline-block"></i>
+            <!-- Loading Indicator Berkontras Tinggi & Ramah Dark Mode -->
+            <div class="col-span-full text-center py-16 text-slate-700 dark:text-slate-300 font-medium" id="loading-indicator">
+                <i class="ph-fill ph-spinner animate-spin text-3xl mb-3 inline-block"></i>
                 <p class="text-sm">Memuat kumpulan doa...</p>
             </div>
         </div>
@@ -250,14 +255,14 @@
 
     <!-- Modal Detail Doa -->
     <div id="doa-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6">
-        <div id="modal-backdrop" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
+        <div id="modal-backdrop" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
 
-        <div id="modal-box" class="relative w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all duration-300 z-10 flex flex-col max-h-[90vh]">
+        <div id="modal-box" class="relative w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-3xl shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all duration-300 z-10 flex flex-col max-h-[90vh]">
             
             <!-- Header Modal -->
-            <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-start justify-between gap-4">
+            <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-start justify-between gap-4">
                 <div>
-                    <span id="modal-category" class=" py-0.5 text-xs font-semibold text-brand-600 dark:text-brand-500 uppercase tracking-wider mb-2 inline-block">
+                    <span id="modal-category" class="py-0.5 text-xs font-bold text-brand-light dark:text-brand-dark uppercase tracking-wider mb-2 inline-block">
                         Doa Harian
                     </span>
                     <h3 id="modal-title" class="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
@@ -265,7 +270,7 @@
                     </h3>
                 </div>
                 
-                <button onclick="closeDoaModal()" class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors" aria-label="Tutup Modal">
+                <button onclick="closeDoaModal()" class="p-2 text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-full transition-colors" aria-label="Tutup Modal">
                     <i class="ph ph-x text-xl"></i>
                 </button>
             </div>
@@ -273,7 +278,7 @@
             <!-- Body Modal -->
             <div class="p-6 overflow-y-auto space-y-6 flex-grow">
                 <!-- Teks Arab -->
-                <div class="bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 text-right">
+                <div class="bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-2xl p-6 text-right">
                     <p id="modal-arab" class="font-arabic text-3xl sm:text-4xl text-slate-900 dark:text-slate-50 leading-relaxed sm:leading-loose">
                         ...
                     </p>
@@ -281,31 +286,31 @@
 
                 <!-- Transliterasi -->
                 <div>
-                    <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Latin</h4>
-                    <p id="modal-latin" class="text-sm text-brand-600 dark:text-brand-500 font-medium italic">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1">Latin</h4>
+                    <p id="modal-latin" class="text-sm text-slate-800 dark:text-slate-200 font-semibold italic">
                         ...
                     </p>
                 </div>
 
                 <!-- Terjemahan -->
                 <div>
-                    <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Artinya</h4>
-                    <p id="modal-terjemahan" class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1">Artinya</h4>
+                    <p id="modal-terjemahan" class="text-sm text-slate-800 dark:text-slate-200 font-medium leading-relaxed">
                         ...
                     </p>
                 </div>
 
                 <!-- Keterangan / Riwayat -->
-                <div id="modal-riwayat-container" class="border-t border-slate-100 dark:border-slate-800 pt-4">
-                    <p id="modal-riwayat" class="text-xs text-slate-400 italic">
+                <div id="modal-riwayat-container" class="border-t border-slate-200 dark:border-slate-800 pt-4">
+                    <p id="modal-riwayat" class="text-xs text-slate-600 dark:text-slate-400 italic font-medium">
                         ...
                     </p>
                 </div>
             </div>
 
             <!-- Footer Action -->
-            <div class="p-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/50 flex justify-end gap-2">
-                <button id="modal-copy-btn" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-sm font-semibold transition-colors">
+            <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/80 flex justify-end gap-2">
+                <button id="modal-copy-btn" class="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-light hover:bg-slate-800 text-slate-100 dark:bg-brand-dark dark:hover:bg-slate-200 dark:text-slate-950 rounded-xl text-sm font-bold transition-colors">
                     <i class="ph ph-copy text-lg"></i> Salin Doa
                 </button>
             </div>
@@ -314,19 +319,18 @@
     </div>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-200 dark:border-slate-800 mt-20 py-12">
+    <footer class="border-t border-slate-300 dark:border-slate-800 mt-20 py-12">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <i class="ph-fill ph-book-open-text text-3xl text-slate-300 dark:text-slate-700 mb-4 inline-block"></i>
-            <p class="font-medium">Qalbu.</p>
-            <p class="text-slate-500 text-sm mt-2">Kumpulan Doa Harian & Dzikir Shahih.</p>
-            <p class="text-slate-500 text-sm mt-8">&copy; 2026 Dibangun untuk kenyamanan ibadah.</p>
+            <i class="ph-fill ph-book-open-text text-3xl text-slate-400 dark:text-slate-600 mb-4 inline-block"></i>
+            <p class="font-bold text-lg text-brand-light dark:text-brand-dark">Qalbu.</p>
+            <p class="text-slate-700 dark:text-slate-300 text-sm mt-2 font-medium">Kumpulan Doa Harian & Dzikir Shahih.</p>
+            <p class="text-slate-600 dark:text-slate-400 text-sm mt-8">&copy; 2026 Dibangun untuk kenyamanan ibadah.</p>
         </div>
     </footer>
 
     <!-- JavaScript Logic -->
     <script>
         let doaList = [];
-        let activeCategory = 'semua';
 
         document.addEventListener('DOMContentLoaded', () => {
             initThemeToggle();
@@ -338,12 +342,6 @@
         function initThemeToggle() {
             const toggleBtn = document.getElementById('theme-toggle');
             const html = document.documentElement;
-            
-            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                html.classList.add('dark');
-            } else {
-                html.classList.remove('dark');
-            }
 
             toggleBtn.addEventListener('click', () => {
                 html.classList.toggle('dark');
@@ -397,9 +395,9 @@
 
             if (list.length === 0) {
                 grid.innerHTML = `
-                    <div class="col-span-full text-center py-12 text-slate-400">
+                    <div class="col-span-full text-center py-12 text-slate-700 dark:text-slate-300 font-medium">
                         <i class="ph ph-magnifying-glass text-4xl mb-2 inline-block"></i>
-                        <p class="text-sm font-medium">Doa tidak ditemukan.</p>
+                        <p class="text-sm font-semibold">Doa tidak ditemukan.</p>
                     </div>
                 `;
                 return;
@@ -411,23 +409,19 @@
                 const tagLabel = doa.tag || 'umum';
 
                 grid.innerHTML += `
-                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 flex flex-col justify-between card-hover-fx hover:border-brand-500 dark:hover:border-brand-500 transition-all">
+                    <div class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-xl p-6 flex flex-col justify-between card-hover-fx hover:border-slate-900 dark:hover:border-slate-100 transition-all">
                         <div>
-                            <!-- Header Card -->
-                            <div class="flex items-center justify-between gap-2 mb-4">
-                                <span class=" py-0.5 text-[10px] font-bold text-brand-600 dark:text-brand-500 uppercase tracking-wider">
+                            <div class="mb-2  border-b-4 border-slate-200 dark:border-slate-800 pb-2">
+                                <!-- Judul Doa -->
+                                <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100 line-clamp-2">
+                                    ${doa.nama}
+                                </h3>
+                                <span class="py-0.5 text-[12px] text-brand-light dark:text-brand-dark mb-4">
                                     ${categoryLabel}
                                 </span>
-                                <button onclick="handleCopyDoa('${safeNama}', \`${doa.ar}\`, \`${doa.idn}\`)" class="text-slate-400 hover:text-brand-600 dark:hover:text-brand-500 p-1 transition-colors" title="Salin Doa">
-                                    <i class="ph ph-copy text-lg"></i>
-                                </button>
                             </div>
-
-                            <!-- Judul Doa -->
-                            <h3 class="font-bold text-lg mb-4 text-slate-900 dark:text-slate-100 line-clamp-2 border-b border-slate-100 dark:border-slate-800 pb-2">
-                                ${doa.nama}
-                            </h3>
-
+                        
+                            
                             <!-- Teks Arab -->
                             <div class="text-right my-4">
                                 <p class="font-arabic text-2xl text-slate-900 dark:text-slate-50 line-clamp-2">
@@ -436,18 +430,18 @@
                             </div>
 
                             <!-- Terjemahan Ringkas -->
-                            <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed mb-6">
+                            <p class="text-xs text-slate-700 dark:text-slate-300 font-medium line-clamp-2 leading-relaxed mb-6">
                                 ${doa.idn}
                             </p>
 
-                            <span class="text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                            <span class="text-[12px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
                                 Tag: ${tagLabel}
                             </span>
                         </div>
 
                         <!-- Footer Card Action -->
-                        <div class="pt-4 border-t border-slate-100 dark:border-slate-800/80">
-                            <button onclick="openDoaModal(${doa.id - 1})" class="w-full py-2.5 px-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 text-slate-700 dark:text-slate-300 text-xs font-semibold transition-all flex items-center justify-center gap-2 group">
+                        <div class="pt-4 border-t border-slate-200 dark:border-slate-800">
+                            <button onclick="openDoaModal(${doa.id - 1})" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-900 hover:text-slate-100 dark:hover:bg-slate-100 dark:hover:text-slate-900 text-slate-900 dark:text-slate-100 text-xs font-bold transition-all flex items-center justify-center gap-2 group">
                                 <span>Baca Selengkapnya</span>
                                 <i class="ph ph-arrow-right group-hover:translate-x-0.5 transition-transform"></i>
                             </button>
@@ -461,11 +455,11 @@
             const searchInput = document.getElementById('search-doa');
 
             let timeoutId;
-            searchInput.addEventListener('input', (e) => {
+            searchInput.addEventListener('input', () => {
                 clearTimeout(timeoutId);
                 timeoutId = setTimeout(() => {
                     applyFilters();
-                }, 500);
+                }, 300);
             });
         }
 
@@ -475,10 +469,9 @@
             const tag = document.getElementById('tag-filter').value.toLowerCase();
 
             const filtered = doaList.filter(doa => {
-                const matchesQuery = doa.nama.toLowerCase().includes(query) || doa.idn.toLowerCase().includes(query);
+                const matchesQuery = (doa.nama && doa.nama.toLowerCase().includes(query)) || (doa.idn && doa.idn.toLowerCase().includes(query));
                 const matchesCategory = category === 'semua kategori' || (doa.grup && doa.grup.toLowerCase() === category);
-                const matchesTag = tag === 'semua tag' || (doa.tag && doa.tag.includes(tag));
-                console.log(`Query: ${matchesQuery}, Category: ${matchesCategory}, Tag: ${matchesTag}`);
+                const matchesTag = tag === 'semua tag' || (doa.tag && doa.tag.toLowerCase().includes(tag));
                 return matchesQuery && matchesCategory && matchesTag;
             });
 
@@ -495,15 +488,15 @@
             const modalBox = document.getElementById('modal-box');
 
             document.getElementById('modal-title').innerText = item.nama;
-            document.getElementById('modal-category').innerText = item.grup;
+            document.getElementById('modal-category').innerText = item.grup || 'Doa Harian';
             document.getElementById('modal-arab').innerText = item.ar;
-            document.getElementById('modal-latin').innerText = item.tr;
-            document.getElementById('modal-terjemahan').innerText = item.idn;
-            document.getElementById('modal-riwayat').innerText = item.tentang || 'HR. Bukhari & Muslim';
+            document.getElementById('modal-latin').innerText = item.tr || item.latin || '-';
+            document.getElementById('modal-terjemahan').innerText = item.idn || item.terjemahan;
+            document.getElementById('modal-riwayat').innerText = item.tentang || item.riwayat || 'HR. Bukhari & Muslim';
 
             const safeNama = (item.nama).replace(/'/g, "\\'");
             document.getElementById('modal-copy-btn').onclick = () => {
-                handleCopyDoa(safeNama, item.ar, item.id);
+                handleCopyDoa(safeNama, item.ar, item.idn || item.terjemahan);
             };
 
             modal.classList.remove('hidden');
@@ -540,52 +533,34 @@
         function getFallbackDoa() {
             return [
                 {
+                    id: 1,
                     nama: "Doa Sebelum Tidur",
-                    kategori: "harian",
-                    arab: "بِسْمِكَ اللّهُمَّ اَحْيَا وَاَمُوْتُ",
-                    latin: "Bismikallahumma ahyaa wa amuut.",
-                    terjemahan: "Dengan nama-Mu ya Allah aku hidup dan dengan nama-Mu aku mati.",
-                    riwayat: "HR. Bukhari dan Muslim"
+                    grup: "Doa Sebelum dan Sesudah Tidur",
+                    tag: "tidur",
+                    ar: "بِسْمِكَ اللّهُمَّ اَحْيَا وَاَمُوْتُ",
+                    tr: "Bismikallahumma ahyaa wa amuut.",
+                    idn: "Dengan nama-Mu ya Allah aku hidup dan dengan nama-Mu aku mati.",
+                    tentang: "HR. Bukhari dan Muslim"
                 },
                 {
+                    id: 2,
                     nama: "Doa Bangun Tidur",
-                    kategori: "harian",
-                    arab: "اَلْحَمْدُ للّهِ الَّذِيْ اَحْيَانَا بَعْدَ مَا اَمَاتَنَا وَاِلَيْهِ النُّشُوْرُ",
-                    latin: "Alhamdu lillahilladzii ahyaana ba'da maa amaatana wa ilaihin nusyuur.",
-                    terjemahan: "Segala puji bagi Allah yang telah menghidupkan kami setelah mematikan kami dan kepada-Nya kami dibangkitkan.",
-                    riwayat: "HR. Bukhari"
+                    grup: "Doa Sebelum dan Sesudah Tidur",
+                    tag: "tidur",
+                    ar: "اَلْحَمْدُ للّهِ الَّذِيْ اَحْيَانَا بَعْدَ مَا اَمَاتَنَا وَاِلَيْهِ النُّشُوْرُ",
+                    tr: "Alhamdu lillahilladzii ahyaana ba'da maa amaatana wa ilaihin nusyuur.",
+                    idn: "Segala puji bagi Allah yang telah menghidupkan kami setelah mematikan kami dan kepada-Nya kami dibangkitkan.",
+                    tentang: "HR. Bukhari"
                 },
                 {
+                    id: 3,
                     nama: "Doa Sebelum Makan",
-                    kategori: "harian",
-                    arab: "اَللّهُمَّ بَارِكْ لَنَا فِيْمَا رَزَقْتَنَا وَقِنَا عَذَابَ النَّارِ",
-                    latin: "Allahumma baarik lanaa fii maa razaqtanaa wa qinaa 'adzaaban naar.",
-                    terjemahan: "Ya Allah, berkahilah kami dalam rezeki yang telah Engkau berikan kepada kami dan peliharalah kami dari siksa api neraka.",
-                    riwayat: "HR. Ibn Sunan"
-                },
-                {
-                    nama: "Doa Sapu Jagat (Kebaikan Dunia Akhirat)",
-                    kategori: "quran",
-                    arab: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
-                    latin: "Rabbanaa aatinaa fid dunyaa hasanataw wa fil aakhirati hasanataw wa qinaa 'adzaaban naar.",
-                    terjemahan: "Ya Tuhan kami, berilah kami kebaikan di dunia dan kebaikan di akhirat dan peliharalah kami dari siksa neraka.",
-                    riwayat: "QS. Al-Baqarah: 201"
-                },
-                {
-                    nama: "Doa Masuk Masjid",
-                    kategori: "ibadah",
-                    arab: "اَللّهُمَّ افْتَحْ لِيْ اَبْوَابَ رَحْمَتِكَ",
-                    latin: "Allahummaftah lii abwaaba rahmatik.",
-                    terjemahan: "Ya Allah, bukakanlah bagiku pintu-pintu rahmat-Mu.",
-                    riwayat: "HR. Muslim"
-                },
-                {
-                    nama: "Dzikir Istighfar",
-                    kategori: "dzikir",
-                    arab: "أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ الَّذِي لاَ إِلَهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ",
-                    latin: "Astaghfirullahal 'adziim alladzii laa ilaaha illaa huwal hayyul qayyuumu wa atuubu ilaih.",
-                    terjemahan: "Aku memohon ampun kepada Allah Yang Maha Agung, yang tidak ada Tuhan selain Dia Yang Maha Hidup lagi Maha Berdiri Sendiri, dan aku bertaubat kepada-Nya.",
-                    riwayat: "HR. Abu Dawud & Tirmidzi"
+                    grup: "Doa Terkait Makan",
+                    tag: "umum",
+                    ar: "اَللّهُمَّ بَارِكْ لَنَا فِيْمَا رَزَقْتَنَا وَقِنَا عَذَابَ النَّارِ",
+                    tr: "Allahumma baarik lanaa fii maa razaqtanaa wa qinaa 'adzaaban naar.",
+                    idn: "Ya Allah, berkahilah kami dalam rezeki yang telah Engkau berikan kepada kami dan peliharalah kami dari siksa api neraka.",
+                    tentang: "HR. Ibn Sunan"
                 }
             ];
         }

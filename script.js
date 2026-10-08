@@ -27,34 +27,33 @@ function initThemeToggle() {
     });
 }
 
-// --- 2. Fetch Jadwal Shalat (Menggunakan MyQuran API) ---
+// --- 2. Fetch Jadwal Shalat (Menggunakan MyQuran / EQuran API) ---
 async function fetchJadwalShalat() {
     const grid = document.getElementById('jadwal-grid');
-    // ID 1301 adalah Jakarta (Anda bisa membuat fitur deteksi lokasi nanti)
-    const kotaId = 1301; 
     
-    // Dapatkan tanggal hari ini dalam format YYYY/MM/DD
     const today = new Date();
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, '0');
-    const tanggalHariIni = new Date().getDate();
+    const tanggalHariIni = today.getDate();
+
     try {
-        const request1 = new Request("https://equran.id/api/v2/shalat",
-            {
-                method: "POST",
-                body: JSON.stringify({
-                    provinsi: "jawa tengah",
-                    kabkota: "kota salatiga",
-                    bulan: month,
-                    tahun: year
-                })
-            }
-        )
+        const request1 = new Request("https://equran.id/api/v2/shalat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                provinsi: "jawa tengah",
+                kabkota: "kota salatiga",
+                bulan: month,
+                tahun: year
+            })
+        });
+
         const response = await fetch(request1);
         const data = await response.json();
-        console.log(data)
 
-        if (data.code == 200) {
+        if (data.code === 200) {
             const jadwal = data.data.jadwal.find((item) => item.tanggal === tanggalHariIni);
             const waktuShalat = [
                 { nama: 'Imsak', waktu: jadwal.imsak, icon: 'ph-moon-stars' },
@@ -69,16 +68,16 @@ async function fetchJadwalShalat() {
             
             waktuShalat.forEach(waktu => {
                 grid.innerHTML += `
-                    <div class="bg-white dark:bg-slate-900 p-4 border border-slate-200 dark:border-slate-800 rounded-2xl text-center card-hover-fx">
-                        <i class="ph ${waktu.icon} text-2xl text-slate-400 dark:text-slate-500 mb-2"></i>
-                        <p class="text-sm text-slate-500 font-medium mb-1">${waktu.nama}</p>
-                        <p class="text-xl font-bold tracking-tight">${waktu.waktu}</p>
+                    <div class="bg-white dark:bg-slate-900 p-4 border border-slate-300 dark:border-slate-800 rounded-2xl text-center card-hover-fx">
+                        <i class="ph ${waktu.icon} text-2xl text-slate-700 dark:text-slate-300 mb-2"></i>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider mb-1">${waktu.nama}</p>
+                        <p class="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">${waktu.waktu}</p>
                     </div>
                 `;
             });
         }
     } catch (error) {
-        grid.innerHTML = `<div class="col-span-2 md:col-span-6 text-center py-4 text-red-500">Gagal memuat jadwal shalat.</div>`;
+        grid.innerHTML = `<div class="col-span-2 md:col-span-6 text-center py-4 text-red-600 dark:text-red-400 font-semibold">Gagal memuat jadwal shalat.</div>`;
         console.error('Error fetching jadwal:', error);
     }
 }
@@ -86,7 +85,6 @@ async function fetchJadwalShalat() {
 // --- 3. Fetch Surah Populer (Menggunakan API EQuran.id v2) ---
 async function fetchSurahPopuler() {
     const grid = document.getElementById('surah-grid');
-    // ID surah yang sering dibaca: Al-Fatihah(1), Al-Kahfi(18), Yasin(36), Ar-Rahman(55), Al-Waqi'ah(56), Al-Mulk(67)
     const targetSurah = [1, 18, 36, 55, 56, 67]; 
     
     try {
@@ -96,22 +94,21 @@ async function fetchSurahPopuler() {
         if (data.code === 200) {
             grid.innerHTML = '';
             
-            // Filter hanya surah yang ada di targetSurah
             const filteredSurah = data.data.filter(surat => targetSurah.includes(surat.nomor));
 
             filteredSurah.forEach(surat => {
                 grid.innerHTML += `
-                    <a href="/al-quran/detail-surah.html?nomor=${surat.nomor}" class="group bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 rounded-2xl flex items-center justify-between card-hover-fx hover:border-brand-500 dark:hover:border-brand-500 transition-colors">
+                    <a href="/al-quran/detail-surah.html?nomor=${surat.nomor}" class="group bg-white dark:bg-slate-900 p-6 border border-slate-300 dark:border-slate-800 rounded-2xl flex items-center justify-between card-hover-fx hover:border-slate-900 dark:hover:border-slate-100 transition-colors">
                         <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-sm font-bold text-slate-500">
+                            <div class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-sm font-bold text-slate-800 dark:text-slate-200">
                                 ${surat.nomor}
                             </div>
                             <div>
-                                <h3 class="font-bold text-lg group-hover:text-brand-600 dark:group-hover:text-brand-500 transition-colors">${surat.namaLatin}</h3>
-                                <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider">${surat.tempatTurun} • ${surat.jumlahAyat} Ayat</p>
+                                <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100 group-hover:text-brand-light dark:group-hover:text-brand-dark transition-colors">${surat.namaLatin}</h3>
+                                <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 uppercase tracking-wider font-medium">${surat.tempatTurun} • ${surat.jumlahAyat} Ayat</p>
                             </div>
                         </div>
-                        <div class="font-arabic text-2xl text-brand-600 dark:text-brand-500 text-right">
+                        <div class="font-arabic text-2xl text-slate-900 dark:text-slate-100 text-right">
                             ${surat.nama}
                         </div>
                     </a>
@@ -119,16 +116,14 @@ async function fetchSurahPopuler() {
             });
         }
     } catch (error) {
-        grid.innerHTML = `<div class="col-span-1 md:col-span-3 text-center py-4 text-red-500">Gagal memuat data surah.</div>`;
+        grid.innerHTML = `<div class="col-span-1 md:col-span-3 text-center py-4 text-red-600 dark:text-red-400 font-semibold">Gagal memuat data surah.</div>`;
         console.error('Error fetching surah:', error);
     }
 }
 
-// --- 4. Cek Fitur "Terakhir Dibaca" (Simulasi Local Storage) ---
+// --- 4. Cek Fitur "Terakhir Dibaca" ---
 function checkTerakhirDibaca() {
     const container = document.getElementById('terakhir-dibaca-container');
-
-    // Coba baca dari local storage (contoh key: 'qalbu_last_read')
     const lastReadData = localStorage.getItem('qalbu_last_read');
 
     if (lastReadData) {
@@ -139,16 +134,16 @@ function checkTerakhirDibaca() {
         container.classList.remove('hidden');
 
         container.innerHTML = `
-        <div class="bg-gradient-to-r from-brand-50 to-brand-100 dark:from-brand-950 dark:to-slate-900 rounded-2xl p-6 border border-brand-200 dark:border-brand-900 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="bg-slate-200/70 dark:bg-slate-900 rounded-2xl p-6 border border-slate-300 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
-                <span class="text-sm font-semibold uppercase tracking-widest text-brand-600 dark:text-brand-500">Terakhir Dibaca</span>
-                <h3 id="last-read-title" class="text-xl font-bold mt-1">${surahName}</h3>
-                <p id="last-read-ayat" class="text-slate-600 dark:text-slate-400 text-sm">${ayat}</p>
+                <span class="text-xs font-bold uppercase tracking-widest text-brand-light dark:text-brand-dark">Terakhir Dibaca</span>
+                <h3 id="last-read-title" class="text-xl font-bold mt-1 text-slate-900 dark:text-slate-100">${surahName}</h3>
+                <p id="last-read-ayat" class="text-slate-700 dark:text-slate-300 text-sm font-medium">${ayat}</p>
             </div>
-            <a href="/al-quran/detail-surah.html?nomor=${surahNumber}" class="px-6 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-medium rounded-full hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+            <a href="/al-quran/detail-surah.html?nomor=${surahNumber}" class="px-6 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-semibold rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
                 Lanjutkan
             </a>
-        </div>`
+        </div>`;
     }
 }
 
@@ -158,14 +153,12 @@ const iconOpen = document.getElementById('menu-icon-open');
 const iconClose = document.getElementById('menu-icon-close');
 const mobileLinks = document.querySelectorAll('.mobile-nav-link');
 
-// Toggle menu saat tombol diklik
 mobileMenuBtn.addEventListener('click', () => {
     mobileMenu.classList.toggle('hidden');
     iconOpen.classList.toggle('hidden');
     iconClose.classList.toggle('hidden');
 });
 
-// Otomatis tutup menu saat salah satu link diklik
 mobileLinks.forEach(link => {
     link.addEventListener('click', () => {
         mobileMenu.classList.add('hidden');
