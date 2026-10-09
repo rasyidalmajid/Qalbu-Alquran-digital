@@ -17,7 +17,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -30,8 +30,8 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
-                        arabic: ['Amiri', 'serif'],
+                        sans: ['Poppins', 'sans-serif'],
+                        arabic: ['Noto Naskh Arabic', 'serif'],
                     },
                     colors: {
                         brand: {
@@ -93,7 +93,7 @@
             <div class="hidden md:flex items-center gap-8 text-sm font-semibold">
                 <a href="#" class="text-brand-light dark:text-brand-dark font-bold underline-offset-4 underline transition-colors">Al-Quran</a>
                 <a href="/doa/home-doa.html" class="hover:text-brand-light dark:hover:text-brand-dark transition-colors">Doa Harian</a>
-                <a href="/index.html#jadwal" class="hover:text-brand-light dark:hover:text-brand-dark transition-colors">Jadwal Shalat</a>
+                <a href="/jadwal-shalat/home-jadwal.html" class="hover:text-brand-light dark:hover:text-brand-dark transition-colors">Jadwal Shalat</a>
             </div>
 
             <div class="flex items-center gap-2">
@@ -115,16 +115,19 @@
         <div id="mobile-menu" class="hidden md:hidden border-t border-slate-300 dark:border-slate-800 bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur-xl px-4 pt-2 pb-4 space-y-1">
             <a href="#" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-bold text-brand-light dark:text-brand-dark bg-slate-200/60 dark:bg-slate-900 transition-colors">Al-Quran</a>
             <a href="/doa/home-doa.html" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-200/80 dark:hover:bg-slate-800/80 hover:text-brand-light dark:hover:text-brand-dark transition-colors">Doa Harian</a>
-            <a href="/index.html#jadwal" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-200/80 dark:hover:bg-slate-800/80 hover:text-brand-light dark:hover:text-brand-dark transition-colors">Jadwal Shalat</a>
+            <a href="/jadwal-shalat/home-jadwal.html" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-200/80 dark:hover:bg-slate-800/80 hover:text-brand-light dark:hover:text-brand-dark transition-colors">Jadwal Shalat</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="max-w-3xl mx-auto px-4 pt-24 pb-16 text-center">        
-        <p class="text-slate-800 dark:text-slate-200 text-lg md:text-xl max-w-[50ch] mb-4 font-bold mx-auto leading-relaxed">
-            Al-Qur'an Digital
+        <!-- Header Section -->
+    <header class="max-w-4xl mx-auto px-4 pt-12 pb-8 text-center">
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-3 text-slate-900 dark:text-slate-100">
+            Jadwal Shalat Hari Ini
+        </h1>
+        <p class="text-slate-700 dark:text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed font-medium">
+            Lihat jadwal shalat harian untuk wilayah Anda. Pilih provinsi, kabupaten/kota, dan bulan untuk melihat jadwal lengkap.
         </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
             <div class="relative w-full sm:w-auto">
                 <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 dark:text-slate-300"></i>
                 <input type="text" id="search-surah" placeholder="Cari surah (mis: Yasin)..." class="w-full sm:w-72 pl-12 pr-4 py-3.5 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-full text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-all font-medium">
@@ -196,7 +199,7 @@
                                     </div>
                                     <div>
                                         <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100 group-hover:text-brand-light dark:group-hover:text-brand-dark transition-colors">${surat.namaLatin}</h3>
-                                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 uppercase tracking-wider font-semibold">${surat.tempatTurun} • ${surat.jumlahAyat} Ayat</p>
+                                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 tracking-wider font-semibold">${surat.tempatTurun} • ${surat.jumlahAyat} Ayat</p>
                                     </div>
                                 </div>
                                 <div class="font-arabic text-2xl text-slate-900 dark:text-slate-100 text-right">
@@ -245,7 +248,7 @@
                                     </div>
                                     <div>
                                         <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100 group-hover:text-brand-light dark:group-hover:text-brand-dark transition-colors">${surat.namaLatin}</h3>
-                                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 uppercase tracking-wider font-semibold">${surat.tempatTurun} • ${surat.jumlahAyat} Ayat</p>
+                                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 tracking-wider font-semibold">${surat.tempatTurun} • ${surat.jumlahAyat} Ayat</p>
                                     </div>
                                 </div>
                                 <div class="font-arabic text-2xl text-slate-900 dark:text-slate-100 text-right">

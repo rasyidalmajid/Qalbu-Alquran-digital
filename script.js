@@ -70,7 +70,7 @@ async function fetchJadwalShalat() {
                 grid.innerHTML += `
                     <div class="bg-white dark:bg-slate-900 p-4 border border-slate-300 dark:border-slate-800 rounded-2xl text-center card-hover-fx">
                         <i class="ph ${waktu.icon} text-2xl text-slate-700 dark:text-slate-300 mb-2"></i>
-                        <p class="text-xs text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider mb-1">${waktu.nama}</p>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 font-semibold tracking-wider mb-1">${waktu.nama}</p>
                         <p class="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">${waktu.waktu}</p>
                     </div>
                 `;
@@ -105,7 +105,7 @@ async function fetchSurahPopuler() {
                             </div>
                             <div>
                                 <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100 group-hover:text-brand-light dark:group-hover:text-brand-dark transition-colors">${surat.namaLatin}</h3>
-                                <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 uppercase tracking-wider font-medium">${surat.tempatTurun} • ${surat.jumlahAyat} Ayat</p>
+                                <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 tracking-wider font-medium">${surat.tempatTurun} • ${surat.jumlahAyat} Ayat</p>
                             </div>
                         </div>
                         <div class="font-arabic text-2xl text-slate-900 dark:text-slate-100 text-right">
@@ -136,7 +136,7 @@ function checkTerakhirDibaca() {
         container.innerHTML = `
         <div class="bg-slate-200/70 dark:bg-slate-900 rounded-2xl p-6 border border-slate-300 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
-                <span class="text-xs font-bold uppercase tracking-widest text-brand-light dark:text-brand-dark">Terakhir Dibaca</span>
+                <span class="text-xs font-bold tracking-widest text-brand-light dark:text-brand-dark">Terakhir Dibaca</span>
                 <h3 id="last-read-title" class="text-xl font-bold mt-1 text-slate-900 dark:text-slate-100">${surahName}</h3>
                 <p id="last-read-ayat" class="text-slate-700 dark:text-slate-300 text-sm font-medium">${ayat}</p>
             </div>
